@@ -1,4 +1,5 @@
-#include <iostream>
+#include <string>
+#include <sstream>
 
 #ifndef HTTPRESPONSE_H
 #define HTTPRESPONSE_H
@@ -10,10 +11,15 @@ class HTTPResponse {
         HTTPResponse();
         virtual ~HTTPResponse();
         void addHeader( string key, string value );
-        void printHeaders();
+        void setContentType( string contentType );
+        void setCharset( string charSet );
+        void send();
+        ostringstream out;
 
     protected:
         string headers;
+        string contentType;
+        string charSet;
 
     private:
 };

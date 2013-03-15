@@ -17,16 +17,14 @@ void MainController::handleRequest() {
     try {
         string nameF, nameM, nameL;
 
-        response->addHeader( "Content-type", "text/html; charset=utf-8" );
         response->addHeader( "First-Name", "Benyamin" );
         response->addHeader( "Last-Name", "Kazemi" );
-        response->printHeaders();
 
-        printf( "<html>\n" );
-        printf( "<head>\n" );
-        printf( "<title> MainController </title>\n" );
-        printf( "</head>\n" );
-        printf( "<body>\n" );
+        response->out << "<html>\n";
+        response->out << "<head>\n";
+        response->out << "<title> MainController </title>\n";
+        response->out << "</head>\n";
+        response->out << "<body>\n";
         nameM = request->getFormValue( "nameM" );
         nameL = request->getFormValue( "nameL" );
         nameF = request->getFormValue( "nameF" );
@@ -34,31 +32,33 @@ void MainController::handleRequest() {
 
 
         if( nameF.empty() && nameM.empty() && nameL.empty() ) {
-            printf( "<h2>Hello World!</h2>\n" );
+            response->out << "<h2>Hello World!</h2>\n";
         }
 
         if( !nameF.empty() ) {
-            printf( "<h2>nameF: %s</h2>\n", nameF.c_str() );
+            response->out << "<h2>nameF: " << nameF << "</h2>\n";
         }
         if( !nameM.empty() ) {
-            printf( "<h2>nameM: %s</h2>\n", nameM.c_str() );
+            response->out << "<h2>nameM: " << nameM.c_str() << "</h2>\n";
         }
         if( !nameL.empty() ) {
-            printf( "<h2>nameL: %s</h2>\n", nameL.c_str() );
+            response->out << "<h2>nameL: " << nameL.c_str() << "</h2>\n";
         }
 
-        printf( "existFormKey(test): %i<br> \n", request->existFormKey("test") );
+        response->out << "existFormKey(test): " << request->existFormKey("test") << "<br>";
+        response->out << "Testing response->out really quick! <br> <br>" ;
 
-        printf( "isGet: %i<br> \n", request->isGet() );
-        printf( "isPost: %i<br> \n", request->isPost() );
-        printf( "isPut: %i<br> \n", request->isPut() );
-        printf( "isDelete: %i<br> \n", request->isDelete() );
-        printf( "isOptions: %i<br> \n", request->isOptions() );
-        printf( "isHead: %i<br> \n", request->isHead() );
+        response->out << "isGet: " << request->isGet() << "<br>" << endl;
+        response->out << "isPost: " << request->isPost() << "<br> \n";
+        response->out << "isPut: " << request->isPut() << "<br> \n";
+        response->out << "isDelete: " << request->isDelete() << "<br> \n";
+        response->out << "isOptions: " << request->isOptions() << "<br> \n";
+        response->out << "isHead: " << request->isHead() << "<br> \n";
 
-        printf( "</body>\n" );
-        printf( "</html>\n" );
+        response->out << "</body>\n";
+        response->out << "</html>\n";
 
+        response->send();
     }
     catch( exception e ) {
         printf("Content-type:text/html\r\n\r\n" );

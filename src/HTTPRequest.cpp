@@ -7,7 +7,6 @@
 HTTPRequest::HTTPRequest() {
     queryString = getenv("QUERY_STRING");
     httpMethod = getenv("REQUEST_METHOD");
-    //decodePathParams( queryString );
 }
 
 HTTPRequest::~HTTPRequest() {
