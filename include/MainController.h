@@ -1,9 +1,9 @@
-#include "HTTPRequest.h"
+#include "GenericController.h"
 
 #ifndef MAINCONTROLLER_H
 #define MAINCONTROLLER_H
 
-class MainController : public HTTPRequest {
+class MainController : public GenericController {
     public:
         MainController();
         virtual ~MainController();

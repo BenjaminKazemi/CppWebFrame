@@ -16,7 +16,11 @@ void MainController::handleRequest() {
     try {
         char *nameF = NULL, *nameM = NULL, *nameL = NULL;
 
-        printf( "Content-type:text/html\r\n\r\n" );
+        addHeader( "Content-type", "text/html; charset=utf-8" );
+        addHeader( "First-Name", "Benyamin" );
+        addHeader( "Last-Name", "Kazemi" );
+        printHeaders();
+
         printf( "<html>\n" );
         printf( "<head>\n" );
         printf( "<title> MainController </title>\n" );
@@ -31,14 +35,21 @@ void MainController::handleRequest() {
         }
 
         if( nameF != NULL ) {
-            printf( "<h2>nameF: %s!</h2>\n", nameF );
+            printf( "<h2>nameF: %s</h2>\n", nameF );
         }
         if( nameM != NULL ) {
-            printf( "<h2>nameM: %s!</h2>\n", nameM );
+            printf( "<h2>nameM: %s</h2>\n", nameM );
         }
         if( nameL != NULL ) {
-            printf( "<h2>nameL: %s!</h2>\n", nameL );
+            printf( "<h2>nameL: %s</h2>\n", nameL );
         }
+
+        printf( "isGet: %i<br> \n", isGet() );
+        printf( "isPost: %i<br> \n", isPost() );
+        printf( "isPut: %i<br> \n", isPut() );
+        printf( "isDelete: %i<br> \n", isDelete() );
+        printf( "isOptions: %i<br> \n", isOptions() );
+        printf( "isHead: %i<br> \n", isHead() );
 
         printf( "</body>\n" );
         printf( "</html>\n" );

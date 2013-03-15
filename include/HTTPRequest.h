@@ -12,11 +12,19 @@ public:
     virtual ~HTTPRequest();
     char* getqueryString() { return queryString; }
     void getFormValue( char* key, char** value );
+    bool isGet();
+    bool isPost();
+    bool isDelete();
+    bool isPut();
+    bool isOptions();
+    bool isHead();
 
 protected:
 
 private:
     char* queryString;
+    char* requestMethod;
+
     void decodePathParams( char *src );
 };
 

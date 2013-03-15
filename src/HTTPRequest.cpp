@@ -6,6 +6,7 @@
 
 HTTPRequest::HTTPRequest() {
     queryString = getenv("QUERY_STRING");
+    requestMethod = getenv("REQUEST_METHOD");
     //decodePathParams( queryString );
 }
 
@@ -76,3 +77,28 @@ void HTTPRequest::decodePathParams( char *src ) {
     }
     *dest = '\0';
 }
+
+bool HTTPRequest::isGet() {
+    return strcmp("GET", requestMethod) == 0;
+}
+
+bool HTTPRequest::isPost() {
+    return strcmp("POST", requestMethod) == 0;
+}
+
+bool HTTPRequest::isDelete() {
+    return strcmp("DELETE", requestMethod) == 0;
+}
+
+bool HTTPRequest::isPut() {
+    return strcmp("PUT", requestMethod) == 0;
+}
+
+bool HTTPRequest::isOptions() {
+    return strcmp("OPTIONS", requestMethod) == 0;
+}
+
+bool HTTPRequest::isHead() {
+    return strcmp("HEAD", requestMethod) == 0;
+}
+
