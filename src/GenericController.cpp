@@ -1,7 +1,7 @@
 #include "GenericController.h"
 
-GenericController::GenericController() {
-    request = new HTTPRequest();
+GenericController::GenericController( string uriPrefix ) {
+    request = new HTTPRequest( uriPrefix );
     response = new HTTPResponse();
 }
 

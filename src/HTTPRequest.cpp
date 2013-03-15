@@ -4,9 +4,11 @@
 
 #include "HTTPRequest.h"
 
-HTTPRequest::HTTPRequest() {
+HTTPRequest::HTTPRequest( string uriPrefix ) {
+    this->uriPrefix = uriPrefix;
     queryString = getenv("QUERY_STRING");
     httpMethod = getenv("REQUEST_METHOD");
+    requestedUri = getenv("PATH_INFO");
 }
 
 HTTPRequest::~HTTPRequest() {
@@ -105,27 +107,10 @@ string HTTPRequest::decodePathParams( const char *src ) {
     return dest;
 }
 
-bool HTTPRequest::isGet() {
-    return httpMethod == "GET";
+string HTTPRequest::getHeader( const char *key ) {
+    const char *val = getenv( string("HTTP_").append(key).c_str() );
+    if( val == 0 ) {
+        return "";
+    }
+    return val;
 }
-
-bool HTTPRequest::isPost() {
-    return httpMethod == "POST";
-}
-
-bool HTTPRequest::isDelete() {
-    return httpMethod == "DELETE";
-}
-
-bool HTTPRequest::isPut() {
-    return httpMethod == "PUT";
-}
-
-bool HTTPRequest::isOptions() {
-    return httpMethod == "OPTIONS";
-}
-
-bool HTTPRequest::isHead() {
-    return httpMethod == "HEAD";
-}
-

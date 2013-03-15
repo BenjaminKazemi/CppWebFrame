@@ -5,7 +5,7 @@
 
 class MainController : public GenericController {
     public:
-        MainController();
+        MainController( string uriPrefix );
         virtual ~MainController();
         void handleRequest();
 

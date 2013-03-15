@@ -6,7 +6,7 @@
 
 class GenericController {
     public:
-        GenericController();
+        GenericController( string uriPrefix );
         virtual ~GenericController();
         HTTPRequest* request;
         HTTPResponse* response;
