@@ -1,26 +1,27 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <cstring>
+#include <string>
 
 #include "HTTPRequest.h"
 
 HTTPRequest::HTTPRequest() {
     queryString = getenv("QUERY_STRING");
-    requestMethod = getenv("REQUEST_METHOD");
+    httpMethod = getenv("REQUEST_METHOD");
     //decodePathParams( queryString );
 }
 
-HTTPRequest::~HTTPRequest() {}
+HTTPRequest::~HTTPRequest() {
+    delete this;
+}
 
-void HTTPRequest::getFormValue( char* key, char** value ) {
-    if( key == NULL || queryString == NULL ) {
-        *value = NULL;
-        return;
+string HTTPRequest::getFormValue( const char* key ) {
+    if( key == NULL || queryString == "" ) {
+        return "";
     }
 
     int first = 0, last = 0;
-    char* tmpKey = key;
-    char* tmpQueryString = queryString;
+    const char* tmpKey = key;
+    const char* tmpQueryString = queryString.c_str();
     for(; *tmpQueryString!= '\0'; tmpQueryString++ ) {
         if( *tmpKey == *tmpQueryString ) {
             tmpKey++;
@@ -45,60 +46,87 @@ void HTTPRequest::getFormValue( char* key, char** value ) {
     }
 
     if( first >= last ) {
-        *value = NULL;
+        return "";
     } else {
-        *value = new char[last-first];
+        char* value = new char[last-first];
         int i = 0;
         for( first++; first < last; first++, i++ ) {
-            (*value)[i] = queryString[first];
+            value[i] = queryString[first];
         }
-        (*value)[i] = '\0';
-        decodePathParams( *value );
+        value[i] = '\0';
+        string s = decodePathParams( value );
+        delete value;
+
+        return s;
     }
 }
 
-void HTTPRequest::decodePathParams( char *src ) {
-    if( src == NULL ) return;
+bool HTTPRequest::existFormKey( const char* key ) {
+    if( key == NULL || *key == '\0' || queryString.empty() ) {
+        return "";
+    }
 
-    char *dest = src;
-    for(; *src != '\0'; src++, dest++ ) {
+    const char* tmpKey = key;
+    const char* tmpQueryString = queryString.c_str();
+    for(; *tmpQueryString!= '\0'; tmpQueryString++ ) {
+        if( *tmpKey == *tmpQueryString ) {
+            tmpKey++;
+            if( *tmpKey == '\0' && *(tmpQueryString+1) == '=' ) {
+                return true;
+            }
+        } else {
+            while( *(tmpQueryString+1) != '\0' && *tmpQueryString != '&' ) {
+                tmpQueryString++;
+            }
+            tmpKey = key;
+        }
+    }
+
+    return false;
+}
+
+string HTTPRequest::decodePathParams( const char *src ) {
+    if( src == NULL ) return NULL;
+
+    string dest = "";
+    for(; *src != '\0'; src++ ) {
         if(*src == '+') {
-            *dest = ' ';
+            dest += ' ';
         } else if(*src == '%') {
             int code;
             if(sscanf(src+1, "%2x", &code) != 1) {
                 code = '?';
             }
-            *dest = code;
+            dest += code;
             src +=2;
         } else {
-            *dest = *src;
+            dest += *src;
         }
     }
-    *dest = '\0';
+    return dest;
 }
 
 bool HTTPRequest::isGet() {
-    return strcmp("GET", requestMethod) == 0;
+    return httpMethod == "GET";
 }
 
 bool HTTPRequest::isPost() {
-    return strcmp("POST", requestMethod) == 0;
+    return httpMethod == "POST";
 }
 
 bool HTTPRequest::isDelete() {
-    return strcmp("DELETE", requestMethod) == 0;
+    return httpMethod == "DELETE";
 }
 
 bool HTTPRequest::isPut() {
-    return strcmp("PUT", requestMethod) == 0;
+    return httpMethod == "PUT";
 }
 
 bool HTTPRequest::isOptions() {
-    return strcmp("OPTIONS", requestMethod) == 0;
+    return httpMethod == "OPTIONS";
 }
 
 bool HTTPRequest::isHead() {
-    return strcmp("HEAD", requestMethod) == 0;
+    return httpMethod == "HEAD";
 }
 

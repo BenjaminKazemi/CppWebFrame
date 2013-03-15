@@ -4,12 +4,15 @@
 #ifndef GENERICCONTROLLER_H
 #define GENERICCONTROLLER_H
 
-class GenericController : public HTTPRequest, public HTTPResponse
-{
+class GenericController {
     public:
         GenericController();
         virtual ~GenericController();
+        HTTPRequest* request;
+        HTTPResponse* response;
+
     protected:
+
     private:
 };
 

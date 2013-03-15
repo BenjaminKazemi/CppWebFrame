@@ -6,7 +6,8 @@
 
 using namespace std;
 
-MainController::MainController() {}
+MainController::MainController() {
+}
 
 MainController::~MainController() {
     delete this;
@@ -14,45 +15,50 @@ MainController::~MainController() {
 
 void MainController::handleRequest() {
     try {
-        char *nameF = NULL, *nameM = NULL, *nameL = NULL;
+        string nameF, nameM, nameL;
 
-        addHeader( "Content-type", "text/html; charset=utf-8" );
-        addHeader( "First-Name", "Benyamin" );
-        addHeader( "Last-Name", "Kazemi" );
-        printHeaders();
+        response->addHeader( "Content-type", "text/html; charset=utf-8" );
+        response->addHeader( "First-Name", "Benyamin" );
+        response->addHeader( "Last-Name", "Kazemi" );
+        response->printHeaders();
 
         printf( "<html>\n" );
         printf( "<head>\n" );
         printf( "<title> MainController </title>\n" );
         printf( "</head>\n" );
         printf( "<body>\n" );
-        getFormValue( "nameM", &nameM );
-        getFormValue( "nameL", &nameL );
-        getFormValue( "nameF", &nameF );
+        nameM = request->getFormValue( "nameM" );
+        nameL = request->getFormValue( "nameL" );
+        nameF = request->getFormValue( "nameF" );
+        request->getFormValue( "nonExistingParam" );
 
-        if( nameF == NULL && nameM == NULL && nameL == NULL ) {
+
+        if( nameF.empty() && nameM.empty() && nameL.empty() ) {
             printf( "<h2>Hello World!</h2>\n" );
         }
 
-        if( nameF != NULL ) {
-            printf( "<h2>nameF: %s</h2>\n", nameF );
+        if( !nameF.empty() ) {
+            printf( "<h2>nameF: %s</h2>\n", nameF.c_str() );
         }
-        if( nameM != NULL ) {
-            printf( "<h2>nameM: %s</h2>\n", nameM );
+        if( !nameM.empty() ) {
+            printf( "<h2>nameM: %s</h2>\n", nameM.c_str() );
         }
-        if( nameL != NULL ) {
-            printf( "<h2>nameL: %s</h2>\n", nameL );
+        if( !nameL.empty() ) {
+            printf( "<h2>nameL: %s</h2>\n", nameL.c_str() );
         }
 
-        printf( "isGet: %i<br> \n", isGet() );
-        printf( "isPost: %i<br> \n", isPost() );
-        printf( "isPut: %i<br> \n", isPut() );
-        printf( "isDelete: %i<br> \n", isDelete() );
-        printf( "isOptions: %i<br> \n", isOptions() );
-        printf( "isHead: %i<br> \n", isHead() );
+        printf( "existFormKey(test): %i<br> \n", request->existFormKey("test") );
+
+        printf( "isGet: %i<br> \n", request->isGet() );
+        printf( "isPost: %i<br> \n", request->isPost() );
+        printf( "isPut: %i<br> \n", request->isPut() );
+        printf( "isDelete: %i<br> \n", request->isDelete() );
+        printf( "isOptions: %i<br> \n", request->isOptions() );
+        printf( "isHead: %i<br> \n", request->isHead() );
 
         printf( "</body>\n" );
         printf( "</html>\n" );
+
     }
     catch( exception e ) {
         printf("Content-type:text/html\r\n\r\n" );

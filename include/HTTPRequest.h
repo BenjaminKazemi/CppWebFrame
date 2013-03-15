@@ -1,17 +1,17 @@
+#include <string>
+
 #ifndef HTTPREQUEST_H
 #define HTTPREQUEST_H
 
-#define MAXLEN 80
-#define EXTRA 5
-#define MAXINPUT MAXLEN + EXTRA + 2
+using namespace std;
 
-class HTTPRequest
-{
+class HTTPRequest {
 public:
     HTTPRequest();
     virtual ~HTTPRequest();
-    char* getqueryString() { return queryString; }
-    void getFormValue( char* key, char** value );
+    string getqueryString() { return queryString; }
+    string getFormValue( const char* key );
+    bool existFormKey( const char* key );
     bool isGet();
     bool isPost();
     bool isDelete();
@@ -22,10 +22,10 @@ public:
 protected:
 
 private:
-    char* queryString;
-    char* requestMethod;
+    string queryString;
+    string httpMethod;
 
-    void decodePathParams( char *src );
+    string decodePathParams( const char *src );
 };
 
 #endif // HTTPREQUEST_H

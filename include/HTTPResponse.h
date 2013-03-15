@@ -5,8 +5,7 @@
 
 using namespace std;
 
-class HTTPResponse
-{
+class HTTPResponse {
     public:
         HTTPResponse();
         virtual ~HTTPResponse();
