@@ -7,14 +7,16 @@ using namespace std;
 
 class HTTPRequest {
 public:
-    HTTPRequest( string uriPrefix );
+    HTTPRequest();
     virtual ~HTTPRequest();
 
     string getqueryString() { return queryString; }
-    string getFormValue( const char* key );
-    string getRequestedUri() { return requestedUri; };
     string getHttpMethod() { return httpMethod; };
+    string getRequestedUri() { return requestedUri; };
+
+    string getFormValue( const char* key );
     string getHeader( const char* key );
+    string getCookie( const char* key );
 
     bool existFormKey( const char* key );
 
@@ -24,7 +26,6 @@ private:
     string queryString;
     string httpMethod;
     string requestedUri;
-    string uriPrefix;
 
     string decodePathParams( const char* src );
 };

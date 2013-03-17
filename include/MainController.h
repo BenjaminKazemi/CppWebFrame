@@ -5,14 +5,13 @@
 
 class MainController : public GenericController {
     public:
-        MainController( string uriPrefix );
+        MainController();
         virtual ~MainController();
         void handleRequest();
 
     protected:
 
     private:
-
 };
 
 #endif // MAINCONTROLLER_H

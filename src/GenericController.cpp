@@ -1,10 +1,16 @@
 #include "GenericController.h"
 
-GenericController::GenericController( string uriPrefix ) {
-    request = new HTTPRequest( uriPrefix );
+GenericController::GenericController() {
+    request = new HTTPRequest();
     response = new HTTPResponse();
 }
 
 GenericController::~GenericController() {
-    delete this;
+    delete request;
+    delete response;
 }
+
+GenericController* GenericController::operator = ( const GenericController *rhs ) {
+    return this;
+}
+

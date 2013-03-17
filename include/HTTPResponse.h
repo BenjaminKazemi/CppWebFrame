@@ -1,5 +1,6 @@
 #include <string>
 #include <sstream>
+#include <cookie.h>
 
 #ifndef HTTPRESPONSE_H
 #define HTTPRESPONSE_H
@@ -11,6 +12,7 @@ class HTTPResponse {
         HTTPResponse();
         virtual ~HTTPResponse();
         void addHeader( string key, string value );
+        void addCookie( Cookie cookie );
         void setContentType( string contentType );
         void setCharset( string charSet );
         void send();

@@ -8,7 +8,6 @@ HTTPResponse::HTTPResponse() {
 }
 
 HTTPResponse::~HTTPResponse() {
-    delete this;
 }
 
 void HTTPResponse::addHeader( string key, string value ) {
@@ -26,4 +25,8 @@ void HTTPResponse::setContentType( string contentType ) {
 
 void HTTPResponse::setCharset( string charSet ) {
     this->charSet = charSet;
+}
+
+void HTTPResponse::addCookie( Cookie cookie ) {
+    addHeader( "Set-Cookie", cookie.toString() );
 }

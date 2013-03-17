@@ -4,15 +4,13 @@
 
 #include "HTTPRequest.h"
 
-HTTPRequest::HTTPRequest( string uriPrefix ) {
-    this->uriPrefix = uriPrefix;
+HTTPRequest::HTTPRequest() {
     queryString = getenv("QUERY_STRING");
     httpMethod = getenv("REQUEST_METHOD");
     requestedUri = getenv("PATH_INFO");
 }
 
 HTTPRequest::~HTTPRequest() {
-    delete this;
 }
 
 string HTTPRequest::getFormValue( const char* key ) {

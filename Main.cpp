@@ -1,11 +1,10 @@
-#include "MainController.h"
+#include "ControllerManager.h"
 
 using namespace std;
 
-int main ()
-{
-    MainController* controller = new MainController( "/cgi-bin/hello.cgi" );
-    controller->handleRequest();
+int main() {
+    ControllerManager controller;
+    controller.route();
 
     return 0;
 }

@@ -4,24 +4,25 @@
 
 #include "MainController.h"
 
-using namespace std;
-
-MainController::MainController( string uriPrefix ) : GenericController( uriPrefix ) {
-}
+MainController::MainController() {}
 
 MainController::~MainController() {
-    delete this;
 }
 
 void MainController::handleRequest() {
     string nameF, nameM, nameL;
 
+    Cookie c("user", "Benjamin");
+    response->addCookie( c );
     response->addHeader( "First-Name", "Benyamin" );
     response->addHeader( "Last-Name", "Kazemi" );
+    c.name = "test_cookie";
+    c.value = "Test_Benjamin";
+    response->addCookie( c );
 
     response->out << "<html>\n";
     response->out << "<head>\n";
-    response->out << "<title> MainController </title>\n";
+    response->out << "<title> ControllerManager </title>\n";
     response->out << "</head>\n";
     response->out << "<body>\n";
     nameM = request->getFormValue( "nameM" );
@@ -48,6 +49,7 @@ void MainController::handleRequest() {
 
     response->out << "httpMethod: " << request->getHttpMethod() << "<br>" << endl;
     response->out << "header(name): " << request->getHeader("name") << "<br>" << endl;
+    response->out << "HTTP_COOKIE: " << getenv("HTTP_COOKIE") << "<br>" << endl;
 
     response->out << "</body>\n";
     response->out << "</html>\n";
