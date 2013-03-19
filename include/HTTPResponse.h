@@ -17,6 +17,8 @@ class HTTPResponse {
         void setCharset( string charSet );
         void send();
         ostringstream out;
+        void redirect( string url, bool sendParams = true, bool keepMethod = true );
+        void redirectOutside( string url );
 
     protected:
         string headers;

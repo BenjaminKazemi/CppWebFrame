@@ -1,5 +1,7 @@
 #include <iostream>
 #include <stdio.h>
+#include <stdlib.h>
+
 #include "HTTPResponse.h"
 
 HTTPResponse::HTTPResponse() {
@@ -29,4 +31,33 @@ void HTTPResponse::setCharset( string charSet ) {
 
 void HTTPResponse::addCookie( Cookie cookie ) {
     addHeader( "Set-Cookie", cookie.toString() );
+}
+
+void HTTPResponse::redirectOutside( string url ) {
+    addHeader("Location", url );
+    send();
+}
+
+void HTTPResponse::redirect( string url, bool sendParams, bool keepMethod ) {
+    string redirectUrl = getenv("SERVER_PROTOCOL");
+    if( redirectUrl.find("HTTPS") != string::npos ) {
+        redirectUrl = "https://";
+    } else if( redirectUrl.find("HTTP") != string::npos ) {
+        redirectUrl = "http://";
+    } else {
+        redirectUrl = "http://";
+    }
+
+    redirectUrl += getenv("HTTP_HOST") + string(getenv("SCRIPT_NAME")) + url;
+
+    if( sendParams ) {
+        redirectUrl += "?" + string(getenv("QUERY_STRING"));
+    }
+
+    if( !keepMethod ) {
+        addHeader("Status Code", "302 Found");
+    } else {
+        addHeader("Status Code", "302 Found");
+    }
+    redirectOutside( redirectUrl );
 }

@@ -1,44 +1,35 @@
 #include <iostream>
+#include <vector>
 
 #include "ControllerManager.h"
 #include "MainController.h"
 #include "TestController.h"
+#include "RedirectExampleController.h"
 
 using namespace std;
 
 ControllerManager::ControllerManager() {
-    setUrlHandler("/main", new MainController() );
-    setUrlHandler("/main/test", new TestController() );
-//    setUrlHandler("/main/t1", this );
 }
 
 ControllerManager::~ControllerManager() {
-    for( map<string, GenericController*>::iterator ii = routes.begin(); ii != routes.end(); ++ii ) {
-        delete (*ii).second;
+    for( vector<Route>::iterator p=routes.begin(); p!=routes.end(); ++p ) {
+        delete (*p).handler;
     }
 }
 
-bool ControllerManager::setUrlHandler( string urlFormat,  GenericController* handler ) {
-    routes[urlFormat] = handler;
+bool ControllerManager::setUrlHandler( string method, string urlFormat,  GenericController* handler ) {
+    Route route( method, urlFormat, handler );
+    routes.push_back( route );
     return true;
 }
 
 void ControllerManager::route() {
-    bool handled = false;
-    for( map<string, GenericController*>::iterator ii = routes.begin(); ii != routes.end(); ++ii ) {
-        //cout << "Content-type: text/html; charset=UTF-8\r\n\r\n";
-        //cout << "<h3>request->getRequestedUri() : " << "getRequestedUri()" << "</h3>";
-        // response->out << "<h3>(*ii).first.compare( request->getRequestedUri() : " << (*ii).first.compare( request->getRequestedUri() ) << "</h3>";
-        if( (*ii).first.compare( getRequestedUri() ) == 0 ) {
-            // response->out << "<h3>" << (*ii).first << "</h3>";
-            (*ii).second->handleRequest();
-            handled = true;
+    for( vector<Route>::iterator p=routes.begin(); p!=routes.end(); ++p ) {
+        if( (*p).urlFormat.compare( getRequestedUri() ) == 0 &&
+            (*p).method.find( getHttpMethod() ) != string::npos ) {
+            (*p).handler->handleRequest();
             break;
         }
-    }
-    if( !handled ) {
-//        cout << "OK";
-        //send();
     }
 }
 

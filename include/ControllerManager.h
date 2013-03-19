@@ -1,5 +1,7 @@
 #include <map>
+#include <vector>
 
+#include "Route.h"
 #include "GenericController.h"
 
 #ifndef ControllerManager_H
@@ -10,12 +12,12 @@ class ControllerManager : private HTTPRequest {
         ControllerManager();
         virtual ~ControllerManager();
         void route();
-        bool setUrlHandler( string urlFormat,  GenericController* handler );
+        bool setUrlHandler( string method, string urlFormat,  GenericController* handler );
 
     protected:
 
     private:
-        map<string, GenericController*> routes;
+        vector<Route> routes;
 
 };
 
