@@ -5,8 +5,8 @@
 
 class RedirectExampleController : public GenericController {
     public:
-        RedirectExampleController();
-        virtual ~RedirectExampleController();
+        RedirectExampleController() {};
+        virtual ~RedirectExampleController() {};
         void handleRequest();
 
     protected:

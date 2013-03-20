@@ -8,6 +8,7 @@
 void handler_main();
 void handler_test();
 void handler_redirect();
+void handler_all();
 
 int main() {
     ControllerManager controller;
@@ -15,9 +16,9 @@ int main() {
     controller.setUrlHandler("GET|POST",    "/main",            handler_main );
     controller.setUrlHandler("POST",        "/main/test",       handler_main );
     controller.setUrlHandler("PUT",         "/main/redirect",   handler_main );
-
     controller.setUrlHandler("*",           "/main/test",       handler_test );
     controller.setUrlHandler("GET",         "/main/redirect",   handler_redirect );
+    controller.setUrlHandler("*",           "*",                handler_all );
 
     controller.route();
 
@@ -37,5 +38,10 @@ void handler_test() {
 void handler_redirect() {
     RedirectExampleController m;
     m.handleRequest();
+}
+
+void handler_all() {
+    TestController m;
+    m.handleAll();
 }
 

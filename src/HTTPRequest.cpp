@@ -7,9 +7,6 @@ HTTPRequest::HTTPRequest() {
     requestedUri = getenv("PATH_INFO");
 }
 
-HTTPRequest::~HTTPRequest() {
-}
-
 string HTTPRequest::getFormValue( const char* key ) {
     if( key == NULL || queryString == "" ) {
         return "";

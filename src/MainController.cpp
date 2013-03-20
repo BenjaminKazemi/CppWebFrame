@@ -1,11 +1,6 @@
 #include "MainController.h"
 #include "Declarations.h"
 
-MainController::MainController() {}
-
-MainController::~MainController() {
-}
-
 void MainController::handleRequest() {
     string nameF, nameM, nameL;
 

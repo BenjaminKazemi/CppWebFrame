@@ -1,8 +1,8 @@
-#include "HTTPRequest.h"
-#include "HTTPResponse.h"
-
 #ifndef GENERICCONTROLLER_H
 #define GENERICCONTROLLER_H
+
+#include "HTTPRequest.h"
+#include "HTTPResponse.h"
 
 class GenericController {
     public:

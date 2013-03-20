@@ -5,9 +5,10 @@
 
 class TestController : public GenericController {
     public:
-        TestController();
-        virtual ~TestController();
+        TestController() {};
+        virtual ~TestController() {};
         void handleRequest();
+        void handleAll();
 
     protected:
     private:

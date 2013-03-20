@@ -5,8 +5,8 @@
 
 class MainController : public GenericController {
     public:
-        MainController();
-        virtual ~MainController();
+        MainController() {};
+        virtual ~MainController() {};
         void handleRequest();
 
     protected:

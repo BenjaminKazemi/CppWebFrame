@@ -6,8 +6,8 @@
 
 class ControllerManager : private HTTPRequest {
     public:
-        ControllerManager();
-        virtual ~ControllerManager();
+        ControllerManager() {};
+        virtual ~ControllerManager() {};
         void route();
         bool setUrlHandler( string method, string urlFormat, Handler handler );
 

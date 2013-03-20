@@ -7,7 +7,7 @@
 class HTTPResponse {
     public:
         HTTPResponse();
-        virtual ~HTTPResponse();
+        virtual ~HTTPResponse() {};
         void addHeader( string key, string value );
         void addCookie( Cookie cookie );
         void setContentType( string contentType );

@@ -6,7 +6,7 @@
 class HTTPRequest {
 public:
     HTTPRequest();
-    virtual ~HTTPRequest();
+    virtual ~HTTPRequest() {};
 
     string getqueryString() { return queryString; }
     string getHttpMethod() { return httpMethod; };

@@ -6,9 +6,6 @@ HTTPResponse::HTTPResponse() {
     charSet = "UTF-8";
 }
 
-HTTPResponse::~HTTPResponse() {
-}
-
 void HTTPResponse::addHeader( string key, string value ) {
     headers += key + ":" + value + "\r\n";
 }
