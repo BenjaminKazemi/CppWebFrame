@@ -1,18 +1,24 @@
 #ifndef ROUTE_H
 #define ROUTE_H
 
-#include "GenericController.h"
-#include "ControllerManager.h"
+#include <string>
+
+typedef void (*Handler)();
 
 struct Route {
-    string method;
-    string urlFormat;
+    std::string method;
+    std::string urlFormat;
     Handler handler;
 
-    Route( string method, string urlFormat, Handler handler) {
+    Route( std::string method, std::string urlFormat, Handler handler ) {
         this->method = method;
         this->urlFormat = urlFormat;
         this->handler = handler;
+    }
+
+    static Route New( std::string method, std::string urlFormat, Handler handler ) {
+        Route r( method, urlFormat, handler );
+        return r;
     }
 
 };

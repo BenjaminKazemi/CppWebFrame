@@ -6,15 +6,15 @@
 
 class ControllerManager : private HTTPRequest {
     public:
-        ControllerManager() {};
+        ControllerManager( Routes routes );
         virtual ~ControllerManager() {};
-        void route();
         bool setUrlHandler( string method, string urlFormat, Handler handler );
+        void route();
 
     protected:
 
     private:
-        std::vector<Route> routes;
+        Routes routes;
 
 };
 
