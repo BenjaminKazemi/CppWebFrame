@@ -1,18 +1,15 @@
-#include <string>
-
-#include "GenericController.h"
-
 #ifndef ROUTE_H
 #define ROUTE_H
 
-using namespace std;
+#include "GenericController.h"
+#include "ControllerManager.h"
 
 struct Route {
     string method;
     string urlFormat;
-    GenericController *handler;
+    Handler handler;
 
-    Route( string method, string urlFormat, GenericController *handler ) {
+    Route( string method, string urlFormat, Handler handler) {
         this->method = method;
         this->urlFormat = urlFormat;
         this->handler = handler;

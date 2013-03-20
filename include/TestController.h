@@ -1,8 +1,7 @@
-#include "GenericController.h"
-
 #ifndef TESTCONTROLLER_H
 #define TESTCONTROLLER_H
 
+#include "GenericController.h"
 
 class TestController : public GenericController {
     public:

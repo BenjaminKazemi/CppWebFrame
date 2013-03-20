@@ -4,13 +4,10 @@
 #ifndef GENERICCONTROLLER_H
 #define GENERICCONTROLLER_H
 
-using namespace std;
-
 class GenericController {
     public:
         GenericController();
         virtual ~GenericController();
-        virtual void handleRequest() = 0;
 
         GenericController* operator=(const GenericController *rhs);
 

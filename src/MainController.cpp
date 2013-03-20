@@ -1,8 +1,5 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-
 #include "MainController.h"
+#include "Declarations.h"
 
 MainController::MainController() {}
 
@@ -47,9 +44,9 @@ void MainController::handleRequest() {
     response->out << "existFormKey(test): " << request->existFormKey("test") << "<br>";
     response->out << "requested URI: {" << request->getRequestedUri() << "}<br>";
 
-    response->out << "httpMethod: " << request->getHttpMethod() << "<br>" << endl;
-    response->out << "header(name): " << request->getHeader("name") << "<br>" << endl;
-    response->out << "HTTP_COOKIE: " << getenv("HTTP_COOKIE") << "<br>" << endl;
+    response->out << "httpMethod: " << request->getHttpMethod() << "<br>" << std::endl;
+    response->out << "header(name): " << request->getHeader("name") << "<br>" << std::endl;
+    response->out << "HTTP_COOKIE: " << getenv("HTTP_COOKIE") << "<br>" << std::endl;
 
     response->out << "</body>\n";
     response->out << "</html>\n";

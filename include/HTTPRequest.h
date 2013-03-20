@@ -1,9 +1,7 @@
-#include <string>
-
 #ifndef HTTPREQUEST_H
 #define HTTPREQUEST_H
 
-using namespace std;
+#include "Declarations.h"
 
 class HTTPRequest {
 public:

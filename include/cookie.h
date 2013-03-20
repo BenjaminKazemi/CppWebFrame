@@ -1,9 +1,7 @@
-#include <string>
-
 #ifndef COOKIE_H
 #define COOKIE_H
 
-using namespace std;
+#include "Declarations.h"
 
 // Needs to improve
 struct Cookie {

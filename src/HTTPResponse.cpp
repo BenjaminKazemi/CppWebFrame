@@ -1,7 +1,4 @@
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
-
+#include "Declarations.h"
 #include "HTTPResponse.h"
 
 HTTPResponse::HTTPResponse() {
@@ -18,7 +15,7 @@ void HTTPResponse::addHeader( string key, string value ) {
 
 void HTTPResponse::send() {
     addHeader( "Content-type", contentType + "; charset=" + charSet );
-    cout << headers.append("\r\n") << out.str();
+    std::cout << headers.append("\r\n") << out.str();
 }
 
 void HTTPResponse::setContentType( string contentType ) {

@@ -1,7 +1,7 @@
-#include "GenericController.h"
-
 #ifndef MAINCONTROLLER_H
 #define MAINCONTROLLER_H
+
+#include "GenericController.h"
 
 class MainController : public GenericController {
     public:

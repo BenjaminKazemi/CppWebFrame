@@ -1,11 +1,8 @@
-#include <string>
-#include <sstream>
-#include <cookie.h>
-
 #ifndef HTTPRESPONSE_H
 #define HTTPRESPONSE_H
 
-using namespace std;
+#include "Declarations.h"
+#include "Cookie.h"
 
 class HTTPResponse {
     public:
@@ -16,9 +13,10 @@ class HTTPResponse {
         void setContentType( string contentType );
         void setCharset( string charSet );
         void send();
-        ostringstream out;
         void redirect( string url, bool sendParams = true, bool keepMethod = true );
         void redirectOutside( string url );
+
+        ostringstream out;
 
     protected:
         string headers;

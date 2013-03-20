@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string>
-
 #include "HTTPRequest.h"
+#include "Declarations.h"
 
 HTTPRequest::HTTPRequest() {
     queryString = getenv("QUERY_STRING");
