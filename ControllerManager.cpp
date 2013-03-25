@@ -21,8 +21,8 @@ bool ControllerManager::setUrlHandler( string method, string urlFormat, Handler 
 
 void ControllerManager::route() {
     for( Routes::iterator p = routes.begin(); p != routes.end(); ++p ) {
-        if( ( (*p).urlFormat.compare( getRequestedUri() ) == 0 || (*p).urlFormat.compare( "*" ) == 0) &&
-            ( (*p).method.find( getHttpMethod() ) != string::npos || (*p).method.compare( "*" ) == 0 ) ) {
+        if( ( (*p).urlFormat.compare( "*" ) == 0 || (*p).urlFormat.compare( getRequestedUri() ) == 0 ) &&
+            ( (*p).method.compare( "*" ) == 0 || (*p).method.find( getHttpMethod() ) != string::npos ) ) {
             (*p).handler();
             break;
         }

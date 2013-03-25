@@ -4,7 +4,9 @@
 HTTPRequest::HTTPRequest() {
     queryString = getenv("QUERY_STRING");
     httpMethod = getenv("REQUEST_METHOD");
-    requestedUri = getenv("PATH_INFO");
+    if( getenv("PATH_INFO") != NULL ) {
+        requestedUri = getenv("PATH_INFO");
+    }
 }
 
 string HTTPRequest::getFormValue( const char* key ) {

@@ -5,3 +5,7 @@ doxygen
 *.cbp
 *.depend
 *.layout
+*.o
+*.gch
+
+
