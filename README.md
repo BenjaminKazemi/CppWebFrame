@@ -12,6 +12,10 @@ Intalled full [Cygwin (1.7.17-1)](http://www.cygwin.com/) on my Window machine t
 
 **Web Server:** Currently using Apache under cygwin.
 
-**Compile:** g++ -DDATABASE_SQLITE -c *.i* *.h* *.c*
+**Compile:**
 
-**Link:** g++ -o driver *.o -lodb-sqlite -lodb
+      g++ -DDATABASE_SQLITE -c *.i* *.h* *.c*
+
+**Link:** 
+
+      g++ -o driver *.o -lodb-sqlite -lodb
